@@ -14,6 +14,7 @@ if __name__ == "__main__":
     parser.add_argument('-ro', '--randomise-order', type=bool, default=False, help="Randomise the order of the tracks in the playlist (default: False)")
     parser.add_argument('-ns', '--songs-per-album', type=int, default=2, help="Number of songs per album to include in playlist (default: 2)")
     parser.add_argument('-od', '--output-dir', type=str, default='.', help="Directory to save the review list (default: current directory)")
+    parser.add_argument('-cn', '--custom-playlist-name', type=str, default=None, help="Name of the custom playlist (default: None)")
 
     # Parse the arguments
     args = parser.parse_args()
@@ -35,5 +36,5 @@ if __name__ == "__main__":
     pt.create_metal_album_list(args.start_date, args.end_date, args.min_score, args.output_dir)
 
     # Create the Spotify playlist
-    pt.create_playlist(f'albumlist_metal-temple_{args.start_date}_{args.end_date}.json', randomise_order=args.randomise_order, songs_per_album=args.songs_per_album)
+    pt.create_playlist(f'albumlist_metal-temple_{args.start_date}_{args.end_date}.json', randomise_order=args.randomise_order, songs_per_album=args.songs_per_album, custom_name=args.custom_playlist_name)
 

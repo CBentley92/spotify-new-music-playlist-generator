@@ -83,7 +83,7 @@ def confirm_artist(artist_list, artist):
     return artist in [artist_item['name'] for artist_item in artist_list]
 
 
-def create_playlist(album_list_file:str, songs_per_album:int=2, randomise_order:bool=False):
+def create_playlist(album_list_file:str, songs_per_album:int=2, randomise_order:bool=False, custom_name:str=None):
     # Authenticate with Spotify
     """
     Creates a Spotify playlist based on a list of albums in a JSON file
@@ -134,7 +134,10 @@ def create_playlist(album_list_file:str, songs_per_album:int=2, randomise_order:
 
     # Create a new playlist
     user_id = sp.me()['id']
-    playlist_name = f"{album_list_file[:-5].split('_')[-3]} playlist for {album_list_file[:-5].split('_')[-2]} - {album_list_file[:-5].split('_')[-1]}"
+    if not custom_name == None:
+        playlist_name = custom_name
+    else:
+        playlist_name = f"{album_list_file[:-5].split('_')[-3]} playlist for {album_list_file[:-5].split('_')[-2]} - {album_list_file[:-5].split('_')[-1]}"
     playlist = sp.user_playlist_create(user=user_id, name=playlist_name, public=False)
 
     # Add tracks to the playlist
